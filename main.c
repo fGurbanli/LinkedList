@@ -3,10 +3,10 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-typedef struct Users {
+typedef struct User {
     char name[100];
     int age;
-    struct Node* next;
+    struct User* next;
 }User;
 
 bool GetBoolInput();
@@ -26,9 +26,12 @@ int main(void) {
         printf("\nEnter a username: ");
         while (getchar() != '\n');
         fgets(temp, sizeof(temp), stdin);
+        temp[strcspn(temp, "\n")] = '\0';
 
         printf("\nEnter an age: ");
         int age = GetIntInput();
+
+        Append(&head, age, temp);
     }
 }
 
@@ -51,6 +54,10 @@ bool GetBoolInput() {
 
 void Append(User** head, int age, char name[100]) {
     User* newUser = malloc(sizeof(User));
+
+    newUser->age = age;
+    strcpy(newUser->name, name);
+    newUser->next = NULL;
 
     if (*head == NULL) {
         *head = newUser;
