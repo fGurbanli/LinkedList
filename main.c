@@ -8,7 +8,10 @@ typedef struct Users {
     int age;
     struct Node* next;
 }User;
+
 bool GetBoolInput();
+
+void Append(User** head, int age, char name[100]);
 
 int main(void) {
     printf("Do you want to add a new user? (1/0)");
@@ -34,4 +37,21 @@ bool GetBoolInput() {
         respond = true;
     }
     return respond;
+}
+
+void Append(User** head, int age, char name[100]) {
+    User* newUser = malloc(sizeof(User));
+
+    if (*head == NULL) {
+        *head = newUser;
+        return;
+    }
+
+    User* current = *head;
+
+    while (current->next != NULL) {
+        current = current->next;
+    }
+
+    current->next  = newUser;
 }
