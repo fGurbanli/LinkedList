@@ -10,16 +10,26 @@ typedef struct Users {
 }User;
 
 bool GetBoolInput();
+int GetIntInput();
 
 void Append(User** head, int age, char name[100]);
 
 int main(void) {
-    printf("Do you want to add a new user? (1/0)");
-    if (!GetBoolInput()) return 0;
+    User* head = NULL;
 
+    while (1) {
+        printf("Do you want to add a new user? (1/0)");
+        if (!GetBoolInput()) exit(0);
 
+        char temp[100];
 
-    return 0;
+        printf("\nEnter a username: ");
+        while (getchar() != '\n');
+        fgets(temp, sizeof(temp), stdin);
+
+        printf("\nEnter an age: ");
+        int age = GetIntInput();
+    }
 }
 
 bool GetBoolInput() {
@@ -54,4 +64,17 @@ void Append(User** head, int age, char name[100]) {
     }
 
     current->next  = newUser;
+}
+
+int GetIntInput() {
+    int input;
+
+    while (1) {
+        if (scanf("%d", &input) == 1 && input >=0) {
+            break;
+        }
+        printf("\nEnter a valid input!\n");
+        while (getchar() != '\n');
+    }
+    return input;
 }
