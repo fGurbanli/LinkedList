@@ -24,7 +24,7 @@ int main(void) {
         printf("Do you want to add a new user? (1/0)");
         if (!GetBoolInput()) {
             PrintUsers(head, count);
-            exit(0);
+            return 0;
         }
         char temp[100];
 
@@ -60,6 +60,10 @@ bool GetBoolInput() {
 
 void Append(User** head, int age, char name[100]) {
     User* newUser = malloc(sizeof(User));
+    if (newUser == NULL) {
+        printf("Memory allocation failed!\n");
+        return;
+    }
 
     newUser->age = age;
     strcpy(newUser->name, name);
@@ -103,7 +107,7 @@ void PrintUsers(User* head, int count) {
 
     User* current = head;
 
-    while (current->next == NULL) {
+    while (current->next != NULL) {
         printf("\nName: %s, Age: %d\n\n", current->name, current->age);
         current = current->next;
     }
