@@ -23,7 +23,7 @@ int main(void) {
     int count = 0;
 
     while (1) {
-        printf("Do you want to add a new user? (1/0)");
+        printf("Do you want to add a new user? (1/0): ");
         if (!GetBoolInput()) {
             PrintUsers(head, count);
             FreeList(head);
