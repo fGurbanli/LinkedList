@@ -142,6 +142,6 @@ This project was created to strengthen my understanding of:
 
 ---
 
-**Author:** Furkan Gurbanli
+**Author:** Furgan Gurbanli
 
 This project is part of my journey to master the C programming language and prepare for Embedded Systems and IoT development.
