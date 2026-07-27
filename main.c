@@ -11,12 +11,14 @@ typedef struct User {
 
 bool GetBoolInput();
 int GetIntInput();
-void PrintUsers();
 
-void Append(User** head, int age, char name[100]);
+void PrintUsers(User* head, int count);
+
+void Append(User** head, int age, char name[100], int* count);
 
 int main(void) {
     User* head = NULL;
+    int count = 0;
 
     while (1) {
         printf("Do you want to add a new user? (1/0)");
@@ -32,7 +34,7 @@ int main(void) {
         printf("\nEnter an age: ");
         int age = GetIntInput();
 
-        Append(&head, age, temp);
+        Append(&head, age, temp,&count);
     }
 }
 
@@ -53,7 +55,7 @@ bool GetBoolInput() {
     return respond;
 }
 
-void Append(User** head, int age, char name[100]) {
+void Append(User** head, int age, char name[100], int* count) {
     User* newUser = malloc(sizeof(User));
 
     newUser->age = age;
@@ -62,6 +64,7 @@ void Append(User** head, int age, char name[100]) {
 
     if (*head == NULL) {
         *head = newUser;
+        (*count)++;
         return;
     }
 
@@ -69,6 +72,7 @@ void Append(User** head, int age, char name[100]) {
 
     while (current->next != NULL) {
         current = current->next;
+        (*count)++;
     }
 
     current->next  = newUser;
@@ -87,6 +91,6 @@ int GetIntInput() {
     return input;
 }
 
-void PrintUsers() {
-
+void PrintUsers(User* head, int count) {
+    printf("\n==== Total %d Users ====\n");
 }
