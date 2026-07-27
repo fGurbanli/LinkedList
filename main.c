@@ -11,6 +11,7 @@ typedef struct User {
 
 bool GetBoolInput();
 int GetIntInput();
+void PrintUsers();
 
 void Append(User** head, int age, char name[100]);
 
@@ -84,4 +85,8 @@ int GetIntInput() {
         while (getchar() != '\n');
     }
     return input;
+}
+
+void PrintUsers() {
+
 }
