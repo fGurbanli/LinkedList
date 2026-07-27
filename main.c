@@ -14,7 +14,7 @@ int GetIntInput();
 
 void PrintUsers(User* head, int count);
 
-void Append(User** head, int age, char name[100], int* count);
+void Append(User** head, int age, char name[100]);
 
 int main(void) {
     User* head = NULL;
@@ -22,8 +22,10 @@ int main(void) {
 
     while (1) {
         printf("Do you want to add a new user? (1/0)");
-        if (!GetBoolInput()) exit(0);
-
+        if (!GetBoolInput()) {
+            PrintUsers(head, count);
+            exit(0);
+        }
         char temp[100];
 
         printf("\nEnter a username: ");
@@ -34,7 +36,8 @@ int main(void) {
         printf("\nEnter an age: ");
         int age = GetIntInput();
 
-        Append(&head, age, temp,&count);
+        Append(&head, age, temp);
+        count++;
     }
 }
 
@@ -55,7 +58,7 @@ bool GetBoolInput() {
     return respond;
 }
 
-void Append(User** head, int age, char name[100], int* count) {
+void Append(User** head, int age, char name[100]) {
     User* newUser = malloc(sizeof(User));
 
     newUser->age = age;
@@ -64,7 +67,6 @@ void Append(User** head, int age, char name[100], int* count) {
 
     if (*head == NULL) {
         *head = newUser;
-        (*count)++;
         return;
     }
 
@@ -72,7 +74,6 @@ void Append(User** head, int age, char name[100], int* count) {
 
     while (current->next != NULL) {
         current = current->next;
-        (*count)++;
     }
 
     current->next  = newUser;
@@ -92,5 +93,18 @@ int GetIntInput() {
 }
 
 void PrintUsers(User* head, int count) {
-    printf("\n==== Total %d Users ====\n");
+
+    if (count == 0) {
+        printf("\nNo user added yet!");
+        return;
+    }
+
+    printf("\n==== Total %d Users ====\n", count);
+
+    User* current = head;
+
+    while (current->next == NULL) {
+        printf("\nName: %s, Age: %d\n\n", current->name, current->age);
+        current = current->next;
+    }
 }
