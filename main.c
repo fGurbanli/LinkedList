@@ -16,6 +16,8 @@ void PrintUsers(User* head, int count);
 
 void Append(User** head, int age, char name[100]);
 
+void FreeList(User* head);
+
 int main(void) {
     User* head = NULL;
     int count = 0;
@@ -24,6 +26,7 @@ int main(void) {
         printf("Do you want to add a new user? (1/0)");
         if (!GetBoolInput()) {
             PrintUsers(head, count);
+            FreeList(head);
             return 0;
         }
         char temp[100];
@@ -110,5 +113,13 @@ void PrintUsers(User* head, int count) {
     while (current->next != NULL) {
         printf("\nName: %s, Age: %d\n\n", current->name, current->age);
         current = current->next;
+    }
+}
+
+void FreeList(User* head) {
+    while (head != NULL) {
+        User* temp = head;
+        head = head->next;
+        free(temp);
     }
 }
