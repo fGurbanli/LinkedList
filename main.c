@@ -110,7 +110,7 @@ void PrintUsers(User* head, int count) {
 
     User* current = head;
 
-    while (current->next != NULL) {
+    while (current != NULL) {
         printf("\nName: %s, Age: %d\n\n", current->name, current->age);
         current = current->next;
     }
