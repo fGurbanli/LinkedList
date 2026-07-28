@@ -137,7 +137,7 @@ Run:
 
 ## Author
 
-**Furkan Gurbanli**
+**Furgan Gurbanli**
 
 Engineering Student • Learning C Programming • Interested in Embedded Systems & IoT
 
