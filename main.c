@@ -18,30 +18,13 @@ void Append(User** head, int age, char name[100]);
 
 void FreeList(User* head);
 
+void Menu(User** head, int* count);
+
 int main(void) {
     User* head = NULL;
     int count = 0;
 
-    while (1) {
-        printf("Do you want to add a new user? (1/0): ");
-        if (!GetBoolInput()) {
-            PrintUsers(head, count);
-            FreeList(head);
-            return 0;
-        }
-        char temp[100];
-
-        printf("\nEnter a username: ");
-        while (getchar() != '\n');
-        fgets(temp, sizeof(temp), stdin);
-        temp[strcspn(temp, "\n")] = '\0';
-
-        printf("\nEnter an age: ");
-        int age = GetIntInput();
-
-        Append(&head, age, temp);
-        count++;
-    }
+    Menu(&head,&count);
 }
 
 bool GetBoolInput() {
@@ -121,5 +104,30 @@ void FreeList(User* head) {
         User* temp = head;
         head = head->next;
         free(temp);
+    }
+}
+
+void Menu(User** head, int* count) {
+    *count = 0;
+
+    while (1) {
+        printf("Do you want to add a new user? (1/0): ");
+        if (!GetBoolInput()) {
+            PrintUsers(*head, *count);
+            FreeList(*head);
+            exit(0);
+        }
+        char temp[100];
+
+        printf("\nEnter a username: ");
+        while (getchar() != '\n');
+        fgets(temp, sizeof(temp), stdin);
+        temp[strcspn(temp, "\n")] = '\0';
+
+        printf("\nEnter an age: ");
+        int age = GetIntInput();
+
+        Append(head, age, temp);
+        count++;
     }
 }
