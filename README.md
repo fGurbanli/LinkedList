@@ -1,147 +1,144 @@
-# Linked List User Management in C
+# Linked List User Manager (C)
 
-A simple User Management System written in C using a **Singly Linked List**. This project demonstrates dynamic memory allocation, pointers, structs, and linked list operations without using arrays to store users.
+A console-based **User Management System** written in C using a **singly linked list**. This project was developed to strengthen my understanding of pointers, dynamic memory allocation, linked lists, modular programming, and manual memory management.
+
+---
 
 ## Features
 
-- Add new users dynamically
-- Store user name and age
-- Print all users
-- Dynamic memory allocation using `malloc()`
-- Memory cleanup using `free()`
-- Input validation for integer and boolean inputs
+* Add users dynamically
+* Store users in a singly linked list
+* Display all stored users
+* Dynamic memory allocation using `malloc()`
+* Proper memory cleanup using `free()`
+* Input validation for integers and boolean values
+* Modular project structure using separate source and header files
 
-## Technologies
-
-- C (C17)
-- Standard C Library
-    - stdio.h
-    - stdlib.h
-    - string.h
-    - stdbool.h
+---
 
 ## Project Structure
 
-```
+```text
 .
 ├── main.c
+├── mainFunctions.c
+├── mainFunctions.h
+├── input.c
+├── input.h
 └── README.md
 ```
 
-## Data Structure
+### File Descriptions
 
-```c
-typedef struct User {
-    char name[100];
-    int age;
-    struct User* next;
-} User;
-```
+| File              | Description                                      |
+| ----------------- | ------------------------------------------------ |
+| `main.c`          | Entry point of the application.                  |
+| `mainFunctions.c` | Contains the menu and linked list operations.    |
+| `mainFunctions.h` | Structure definitions and function declarations. |
+| `input.c`         | Input validation helper functions.               |
+| `input.h`         | Declarations for input validation functions.     |
 
-Each node stores:
+---
 
-- User name
-- User age
-- Pointer to the next node
+## Concepts Practiced
 
-Example:
+* Structures (`struct`)
+* Pointers
+* Pointer to pointer (`User **head`)
+* Dynamic memory allocation (`malloc`, `free`)
+* Singly linked lists
+* Linked list traversal
+* Modular programming
+* Header files
+* Function decomposition
+* Input validation
+* Manual memory management
 
-```
-Head
- ↓
-+-------------+      +-------------+      +-------------+
-| Alice | 21  | ---> | Bob | 19    | ---> | John | 25   | ---> NULL
-+-------------+      +-------------+      +-------------+
-```
+---
 
-## Implemented Functions
+## Example Output
 
-### Append()
-
-Adds a new user to the end of the linked list.
-
-### PrintUsers()
-
-Traverses the linked list and prints every user.
-
-### FreeList()
-
-Frees every allocated node before the program exits to prevent memory leaks.
-
-### GetIntInput()
-
-Validates integer input.
-
-### GetBoolInput()
-
-Accepts only **0** or **1** as valid input.
-
-## Example
-
-```
+```text
 Do you want to add a new user? (1/0): 1
 
-Enter a username:
-Alice
+Enter a username: Alice
 
-Enter an age:
-21
+Enter an age: 22
 
 Do you want to add a new user? (1/0): 1
 
-Enter a username:
-Bob
+Enter a username: Bob
 
-Enter an age:
-19
+Enter an age: 27
 
 Do you want to add a new user? (1/0): 0
 
 ==== Total 2 Users ====
 
-Name: Alice
-Age : 21
+Name: Alice, Age: 22
 
-Name: Bob
-Age : 19
+Name: Bob, Age: 27
 ```
-
-## Concepts Practiced
-
-- Structures
-- Self-referencing Structures
-- Pointers
-- Pointer to Pointer (`User**`)
-- Dynamic Memory Allocation
-- Memory Management
-- Linked Lists
-- Traversing a Linked List
-- Function Decomposition
-- Input Validation
-
-## Future Improvements
-
-- Delete a user
-- Search by name
-- Edit user information
-- Insert at a specific position
-- Save users to a file
-- Load users from a file
-- Sort users by name or age
-- Doubly Linked List implementation
-
-## Learning Outcome
-
-This project was created to strengthen my understanding of:
-
-- Dynamic memory allocation
-- Self-referencing structures
-- Pointer manipulation
-- Singly Linked Lists
-- Writing modular and maintainable C code
 
 ---
 
-**Author:** Furgan Gurbanli
+## Memory Management
 
-This project is part of my journey to master the C programming language and prepare for Embedded Systems and IoT development.
+Every user is stored as a dynamically allocated node.
+
+* Memory is allocated with `malloc()` when a new user is created.
+* Every allocated node is released with `free()` before the program exits.
+
+This prevents memory leaks and reinforces good memory management practices in C.
+
+---
+
+## Future Improvements
+
+* Delete a user
+* Search for a user
+* Edit user information
+* Save users to a file
+* Load users from a file
+* Sort users alphabetically or by age
+* More advanced menu system
+* Doubly linked list implementation
+
+---
+
+## What I Learned
+
+This project helped me gain practical experience with:
+
+* Building and traversing linked lists
+* Working with pointers and pointer-to-pointer parameters
+* Managing dynamic memory safely
+* Separating a C project into multiple source and header files
+* Designing reusable functions
+* Organizing code into a cleaner and more maintainable structure
+
+---
+
+## Build
+
+Compile with GCC:
+
+```bash
+gcc main.c mainFunctions.c input.c -o LinkedList
+```
+
+Run:
+
+```bash
+./LinkedList
+```
+
+---
+
+## Author
+
+**Furkan Gurbanli**
+
+Engineering Student • Learning C Programming • Interested in Embedded Systems & IoT
+
+GitHub: **https://github.com/fGurbanli**
