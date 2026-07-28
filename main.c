@@ -1,16 +1,13 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include <stdbool.h>
+#include "input.h"
 
 typedef struct User {
     char name[100];
     int age;
     struct User* next;
 }User;
-
-bool GetBoolInput();
-int GetIntInput();
 
 void PrintUsers(User* head, int count);
 
@@ -25,23 +22,6 @@ int main(void) {
     int count = 0;
 
     Menu(&head,&count);
-}
-
-bool GetBoolInput() {
-    bool respond = 0;
-    int input;
-
-    while (1) {
-        if (scanf("%d", &input) == 1 && input >=0 && input <= 1) {
-            break;
-        }
-        printf("\nEnter a valid input!\n");
-        while (getchar() != '\n');
-    }
-    if (input == 1) {
-        respond = true;
-    }
-    return respond;
 }
 
 void Append(User** head, int age, char name[100]) {
@@ -67,19 +47,6 @@ void Append(User** head, int age, char name[100]) {
     }
 
     current->next  = newUser;
-}
-
-int GetIntInput() {
-    int input;
-
-    while (1) {
-        if (scanf("%d", &input) == 1 && input >=0) {
-            break;
-        }
-        printf("\nEnter a valid input!\n");
-        while (getchar() != '\n');
-    }
-    return input;
 }
 
 void PrintUsers(User* head, int count) {
