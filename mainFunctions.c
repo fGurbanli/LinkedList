@@ -56,19 +56,20 @@ void FreeList(User* head) {
 }
 
 void Menu(User** head, int* count) {
-    *count = 0;
 
     while (1) {
         printf("Do you want to add a new user? (1/0): ");
         if (!GetBoolInput()) {
             PrintUsers(*head, *count);
             FreeList(*head);
-            exit(0);
+            return;
         }
         char temp[100];
+        int ch;
 
         printf("\nEnter a username: ");
-        while (getchar() != '\n');
+
+        while ((ch = getchar()) != '\n' && ch != EOF);
         fgets(temp, sizeof(temp), stdin);
         temp[strcspn(temp, "\n")] = '\0';
 
@@ -76,6 +77,6 @@ void Menu(User** head, int* count) {
         int age = GetIntInput();
 
         Append(head, age, temp);
-        count++;
+        (*count)++;
     }
 }
