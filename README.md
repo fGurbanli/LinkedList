@@ -13,7 +13,7 @@ A simple User Management System written in C using a **Singly Linked List**. Thi
 
 ## Technologies
 
-- C (C99)
+- C (C17)
 - Standard C Library
     - stdio.h
     - stdlib.h
