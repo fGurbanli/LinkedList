@@ -5,4 +5,6 @@ set(CMAKE_C_STANDARD 17)
 
 add_executable(LinkedList main.c
         input.c
-        input.h)
+        input.h
+        mainFunctions.c
+        mainFunctions.h)
