@@ -28,4 +28,5 @@ void AdminMenu(User** head, int* count);
 
 void PrintMenu();
 
+void AddUser(int* age,char* temp);
 #endif //LINKEDLIST_MAINFUNCTIONS_H

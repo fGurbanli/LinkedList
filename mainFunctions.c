@@ -100,7 +100,7 @@ void PrintMenu() {
     printf("2-)Delete a user\n");
     printf("3-)Edit a user\n");
     printf("4-)User list\n");
-    printf("\n\n0-)Close program\n")
+    printf("\n\n0-)Close program\n");
 }
 
 void AdminMenu(User** head, int* count) {
@@ -116,21 +116,8 @@ void AdminMenu(User** head, int* count) {
                 exit(0);
             case 1:
                 char temp[100];
-                int ch;
-                while ((ch = getchar()) != '\n' && ch != EOF);
-
-
-                printf("\nEnter a username: ");
-                fgets(temp, sizeof(temp), stdin);
-                temp[strcspn(temp, "\n")] = '\0';
-
-                int age = 0;
-                while (age < 10 || age > 100) {
-                    printf("\nUser's age has to be between 10 and 100\n");
-                    printf("\nEnter an age: ");
-                    age = GetIntInput();
-                }
-
+                int age;
+                AddUser(&age, temp);
                 Append(head, age, temp);
                 (*count)++;
                 break;
@@ -140,5 +127,22 @@ void AdminMenu(User** head, int* count) {
             default:
                 printf("\nEnter a valid option!\n");
         }
+    }
+}
+
+void AddUser(int* age,char* temp) {
+    int ch;
+    while ((ch = getchar()) != '\n' && ch != EOF);
+
+
+    printf("\nEnter a username: ");
+    fgets(temp, sizeof(temp), stdin);
+    temp[strcspn(temp, "\n")] = '\0';
+
+    *age = 0;
+    while (*age < 10 || *age > 100) {
+        printf("\nUser's age has to be between 10 and 100\n");
+        printf("\nEnter an age: ");
+        *age = GetIntInput();
     }
 }
