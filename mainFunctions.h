@@ -12,15 +12,20 @@
 typedef struct User {
     char name[100];
     int age;
+    int pin;
     struct User* next;
 }User;
 
-void PrintUsers(User* head, int count);
+int PrintUsers(User* head, int count);
 
 void Append(User** head, int age, char name[100]);
 
 void FreeList(User* head);
 
-void Menu(User** head, int* count);
+void Menu(User** head, int* count, int adminPin);
+
+void AdminMenu(User** head, int* count);
+
+void PrintMenu();
 
 #endif //LINKEDLIST_MAINFUNCTIONS_H
