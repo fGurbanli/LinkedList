@@ -58,23 +58,31 @@ void FreeList(User* head) {
     }
 }
 
-void Menu(User** head, int* count, int adminPin) {
+void Menu(User** head, int* count, int* adminPin) {
+
     while (1) {
+        char temp[100];
+        int age;
+
+        if (*count == 0) {
+            printf("There is no user added yet\n");
+            printf("Please create an admin user\n");
+
+            AddUser(&age,temp,*count,adminPin);
+        }
+
+
         printf("Do you want to run program as an admin? (1/0): ");
         if (GetBoolInput()) {
             printf("Enter admin pin: ");
             int input = GetIntInput();
-            if (input == adminPin) {
-                AdminMenu(head,count);
+            if (input == *adminPin) {
+                AdminMenu(head,count,adminPin);
             }
             printf("Pin is incorrect, running program as a guest...\n");
         }
-        if (PrintUsers(*head, *count) == 0) {
-            return;
-        }
 
         int index = GetIntInput();
-        char temp[100];
         int ch;
         while ((ch = getchar()) != '\n' && ch != EOF);
 
@@ -83,7 +91,6 @@ void Menu(User** head, int* count, int adminPin) {
         fgets(temp, sizeof(temp), stdin);
         temp[strcspn(temp, "\n")] = '\0';
 
-        int age = 0;
         while (age < 10 || age > 100) {
             printf("\nUser's age has to be between 10 and 100\n");
             printf("\nEnter an age: ");
@@ -103,7 +110,7 @@ void PrintMenu() {
     printf("\n\n0-)Close program\n");
 }
 
-void AdminMenu(User** head, int* count) {
+void AdminMenu(User** head, int* count,int* adminPin) {
 
     while (1) {
         PrintMenu();
@@ -117,7 +124,7 @@ void AdminMenu(User** head, int* count) {
             case 1:
                 char temp[100];
                 int age;
-                AddUser(&age, temp);
+                AddUser(&age, temp,*count,adminPin);
                 Append(head, age, temp);
                 (*count)++;
                 break;
@@ -130,7 +137,7 @@ void AdminMenu(User** head, int* count) {
     }
 }
 
-void AddUser(int* age,char* temp) {
+void AddUser(int* age,char* temp,int count, int* adminPin) {
     int ch;
     while ((ch = getchar()) != '\n' && ch != EOF);
 
@@ -144,5 +151,11 @@ void AddUser(int* age,char* temp) {
         printf("\nUser's age has to be between 10 and 100\n");
         printf("\nEnter an age: ");
         *age = GetIntInput();
+    }
+    if (count == 0) {
+        int pin;
+        printf("Enter an admin pin:");
+        pin = GetIntInput();
+        *adminPin = pin;
     }
 }

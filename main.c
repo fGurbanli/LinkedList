@@ -5,5 +5,5 @@ int main(void) {
     int count = 0;
     int adminPin = 1911;
 
-    Menu(&head,&count, adminPin);
+    Menu(&head,&count, &adminPin);
 }
