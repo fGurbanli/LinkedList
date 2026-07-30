@@ -103,9 +103,9 @@ void Menu(User** head, int* count, int* adminPin) {
 }
 
 void PrintMenu() {
-    printf("1-)Add a user\n");
-    printf("2-)Delete a user\n");
-    printf("3-)Edit a user\n");
+    printf("1-)Add an user\n");
+    printf("2-)Delete an user\n");
+    printf("3-)Edit an user\n");
     printf("4-)User list\n");
     printf("\n\n0-)Close program\n");
 }
