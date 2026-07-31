@@ -63,12 +63,13 @@ void Menu(User** head, int* count, int* adminPin) {
     while (1) {
         char temp[100];
         int age;
+        int pin;
 
         if (*count == 0) {
             printf("There is no user added yet\n");
             printf("Please create an admin user\n");
 
-            AddUser(&age,temp,*count,adminPin);
+            AddUser(&age,temp,sizeof(temp),&pin,*count,adminPin);
         }
 
 
@@ -125,7 +126,7 @@ void AdminMenu(User** head, int* count,int* adminPin) {
                 char temp[100];
                 int age;
                 int pin;
-                AddUser(&age, temp,&pin,*count,adminPin);
+                AddUser(&age, temp,sizeof(temp),&pin,*count,adminPin);
                 Append(head, age, temp);
                 (*count)++;
                 break;
@@ -138,13 +139,13 @@ void AdminMenu(User** head, int* count,int* adminPin) {
     }
 }
 
-void AddUser(int* age,char* temp,int* pin,int count, int* adminPin) {
+void AddUser(int* age,char temp[100],size_t size,int* pin,int count, int* adminPin) {
     int ch;
     while ((ch = getchar()) != '\n' && ch != EOF);
 
 
     printf("\nEnter a username: ");
-    fgets(temp, sizeof(temp), stdin);
+    fgets(temp, size, stdin);
     temp[strcspn(temp, "\n")] = '\0';
 
     *age = 0;
@@ -167,10 +168,9 @@ void AddUser(int* age,char* temp,int* pin,int count, int* adminPin) {
     fprintf(userList,"%s;%d;%d;\n", temp, *age, *pin);
 
     if (count == 0) {
-        int pin;
         printf("Enter an admin pin:");
-        pin = GetIntInput();
-        *adminPin = pin;
+        *pin = GetIntInput();
+        *adminPin = *pin;
     }
     fclose(userList);
 }

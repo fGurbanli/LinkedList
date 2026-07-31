@@ -7,13 +7,47 @@ int main(void) {
         return 1;
     }
 
-    char line[100];
-
     int count = 0;
 
     rewind(userList);
 
     User* head = NULL;
+    User* tail = NULL;
+
+    rewind(userList);
+
+    while (1)
+    {
+        User* newUser = malloc(sizeof(User));
+
+        if (newUser == NULL)
+        {
+            printf("Memory allocation failed!\n");
+            fclose(userList);
+            return 1;
+        }
+
+        if (fscanf(userList," %99[^;];%d;%d;",newUser->name,&newUser->age,&newUser->pin) != 3)
+        {
+            free(newUser);
+            break;
+        }
+
+        newUser->next = NULL;
+
+        if (head == NULL)
+        {
+            head = newUser;
+            tail = newUser;
+        }
+        else
+        {
+            tail->next = newUser;
+            tail = newUser;
+        }
+
+        count++;
+    }
 
     int adminPin = 1911;
 
