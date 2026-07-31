@@ -152,6 +152,7 @@ void AddUser(int* age,char* temp,int count, int* adminPin) {
         printf("\nEnter an age: ");
         *age = GetIntInput();
     }
+
     if (count == 0) {
         int pin;
         printf("Enter an admin pin:");
