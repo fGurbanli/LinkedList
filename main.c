@@ -6,15 +6,13 @@ int main(void) {
         printf("\nFile couldn't be opened\n");
         return 1;
     }
+
     char line[100];
 
     int count = 0;
 
     rewind(userList);
 
-    while (fgets(line, sizeof(line), userList) != NULL) {
-        count++;
-    }
     User* head = NULL;
 
     int adminPin = 1911;

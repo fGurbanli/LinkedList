@@ -124,7 +124,8 @@ void AdminMenu(User** head, int* count,int* adminPin) {
             case 1:
                 char temp[100];
                 int age;
-                AddUser(&age, temp,*count,adminPin);
+                int pin;
+                AddUser(&age, temp,&pin,*count,adminPin);
                 Append(head, age, temp);
                 (*count)++;
                 break;
@@ -137,7 +138,7 @@ void AdminMenu(User** head, int* count,int* adminPin) {
     }
 }
 
-void AddUser(int* age,char* temp,int count, int* adminPin) {
+void AddUser(int* age,char* temp,int* pin,int count, int* adminPin) {
     int ch;
     while ((ch = getchar()) != '\n' && ch != EOF);
 
@@ -153,10 +154,23 @@ void AddUser(int* age,char* temp,int count, int* adminPin) {
         *age = GetIntInput();
     }
 
+    printf("Enter a pin code: ");
+    *pin = GetIntInput();
+
+    FILE* userList = fopen("userList.txt", "a");
+
+    if (userList == NULL) {
+        printf("\nFile couldn't be opened\n");
+        return;
+    }
+
+    fprintf(userList,"%s;%d;%d;\n", temp, *age, *pin);
+
     if (count == 0) {
         int pin;
         printf("Enter an admin pin:");
         pin = GetIntInput();
         *adminPin = pin;
     }
+    fclose(userList);
 }
