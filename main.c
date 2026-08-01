@@ -3,7 +3,7 @@
 int main(void) {
     FILE* userList = fopen("userList.txt", "a+");
     if (userList == NULL) {
-        printf("\nFile couldn't be opened\n");
+        printf("\nFile couldn't be opened!\n");
         return 1;
     }
 
@@ -45,7 +45,6 @@ int main(void) {
             tail->next = newUser;
             tail = newUser;
         }
-
         count++;
     }
 
