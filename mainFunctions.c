@@ -88,7 +88,7 @@ void Menu(User** head, int* count, int* adminPin) {
         while ((ch = getchar()) != '\n' && ch != EOF);
 
 
-        printf("\nEnter a username: ");
+        printf("\nPlease enter a username: ");
         fgets(temp, sizeof(temp), stdin);
         temp[strcspn(temp, "\n")] = '\0';
 
