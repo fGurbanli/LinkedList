@@ -48,7 +48,7 @@ int main(void) {
         count++;
     }
 
-    int adminPin = 1911;
+    int adminPin = 0;
 
     Menu(&head,&count, &adminPin);
     fclose(userList);

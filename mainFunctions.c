@@ -69,9 +69,10 @@ void Menu(User** head, int* count, int* adminPin) {
             printf("There is no user added yet.\n");
             printf("Please create an admin user.\n");
 
-            AddUser(&age,temp,sizeof(temp),&pin,*count,adminPin);
+            AddAdmin(&age,temp,sizeof(temp),&pin,*count,adminPin);
         }
 
+        FindAdminPin(adminPin);
 
         printf("Do you want to run program as an admin? (1/0): ");
         if (GetBoolInput()) {
@@ -83,7 +84,6 @@ void Menu(User** head, int* count, int* adminPin) {
             printf("Pin is incorrect, running program as a guest...\n");
         }
 
-        int index = GetIntInput();
         int ch;
         while ((ch = getchar()) != '\n' && ch != EOF);
 
@@ -167,10 +167,56 @@ void AddUser(int* age,char temp[100],size_t size,int* pin,int count, int* adminP
 
     fprintf(userList,"%s;%d;%d;\n", temp, *age, *pin);
 
-    if (count == 0) {
-        printf("Enter an admin pin:");
-        *pin = GetIntInput();
-        *adminPin = *pin;
-    }
     fclose(userList);
+}
+
+void AddAdmin(int* age,char temp[100],size_t size,int* pin,int count, int* adminPin) {
+    int ch;
+    while ((ch = getchar()) != '\n' && ch != EOF);
+
+
+    printf("\nEnter a username: ");
+    fgets(temp, size, stdin);
+    temp[strcspn(temp, "\n")] = '\0';
+
+    *age = 0;
+    while (*age < 10 || *age > 100) {
+        printf("\nUser's age has to be between 10 and 100\n");
+        printf("\nEnter an age: ");
+        *age = GetIntInput();
+    }
+
+    printf("Enter admin pin code: ");
+    *pin = GetIntInput();
+    *adminPin = *pin;
+
+    FILE* userList = fopen("userList.txt", "a");
+
+    if (userList == NULL) {
+        printf("\nFile couldn't be opened\n");
+        return;
+    }
+
+    fprintf(userList,"%s;%d;%d;\n", temp, *age, *pin);
+
+    fclose(userList);
+}
+
+void FindAdminPin(int* adminPin) {
+    int pin;
+    char temp[100];
+    int temp2 = 0;
+    FILE* userList = fopen("userList.txt", "r");
+
+    if (userList == NULL) {
+        printf("\nFile couldn't be opened!");
+        return;
+    }
+
+    rewind(userList);
+
+    fscanf(userList," %99[^;];%d;%d;",temp,&temp2,&pin);
+
+    *adminPin = pin;
+
 }
