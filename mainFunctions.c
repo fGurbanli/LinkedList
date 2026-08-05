@@ -66,8 +66,7 @@ void Menu(User** head, int* count, int* adminPin) {
         int pin;
 
         if (*count == 0) {
-            printf("There is no user added yet.\n");
-            printf("Please create an admin user.\n");
+            printf("There is no user added yet. Please create an admin user.\n");
 
             AddAdmin(&age,temp,sizeof(temp),&pin,*count,adminPin);
         }
