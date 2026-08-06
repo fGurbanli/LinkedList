@@ -185,7 +185,7 @@ void AddAdmin(int* age,char temp[100],size_t size,int* pin,int count, int* admin
         *age = GetIntInput();
     }
 
-    printf("Enter admin pin code: ");
+    printf("Enter an admin pin code: ");
     *pin = GetIntInput();
     *adminPin = *pin;
 
