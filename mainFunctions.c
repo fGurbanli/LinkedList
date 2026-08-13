@@ -78,7 +78,7 @@ void Menu(User** head, int* count, int* adminPin) {
             printf("Enter teacher pin: ");
             int input = GetIntInput();
             if (input == *adminPin) {
-                AdminMenu(head,count,adminPin);
+                AdminMenu(head,count);
             }
             printf("P`teacher pin is incorrect, running program as a guest...\n");
         }
@@ -94,7 +94,7 @@ void PrintMenu() {
     printf("\n\n0-)Close program\n");
 }
 
-void AdminMenu(User** head, int* count,int* adminPin) {
+void AdminMenu(User** head, int* count) {
 
     while (1) {
         PrintMenu();

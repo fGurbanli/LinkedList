@@ -24,7 +24,7 @@ void FreeList(User* head);
 
 void Menu(User** head, int* count, int* adminPin);
 
-void AdminMenu(User** head, int* count, int* adminPin);
+void AdminMenu(User** head, int* count);
 
 void PrintMenu();
 
