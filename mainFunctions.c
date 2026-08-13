@@ -60,9 +60,23 @@ void FreeList(User* head) {
 
 void Menu(User** head, int* count, int* adminPin) {
 
+    FILE* teacherList = fopen("teacherList.txt", "a+");
+
+    char temp[100];
+
+    int teacherCount = 0;
+
+    rewind(teacherList);
+
+    while (fgets(temp,sizeof(temp),teacherList) != NULL) {
+        teacherCount++;
+    }
+
+    fclose(teacherList);
+
     while (1) {
 
-        if (*count == 0) {
+        if (teacherCount == 0) {
             printf("There is no teacher added yet. Please create a teacher user.\n");
 
             AddTeacher(adminPin);
@@ -189,32 +203,32 @@ void AddTeacher(int* adminPin) {
     int pin = GetIntInput();
     *adminPin = pin;
 
-    FILE* userList = fopen("userList.txt", "a");
+    FILE* teacherList = fopen("teacherList.txt", "a");
 
-    if (userList == NULL) {
+    if (teacherList == NULL) {
         printf("\nFile couldn't be opened\n");
         return;
     }
 
-    fprintf(userList,"%s;%d;%d;\n", temp, age, pin);
+    fprintf(teacherList,"%s;%d;%d;\n", temp, age, pin);
 
-    fclose(userList);
+    fclose(teacherList);
 }
 
 void FindTeacherPin(int* adminPin) {
     int pin;
     char temp[100];
     int temp2 = 0;
-    FILE* userList = fopen("userList.txt", "r");
+    FILE* teacherList = fopen("teacherList.txt", "r");
 
-    if (userList == NULL) {
+    if (teacherList == NULL) {
         printf("\nFile couldn't be opened!");
         return;
     }
 
-    rewind(userList);
+    rewind(teacherList);
 
-    fscanf(userList," %99[^;];%d;%d;",temp,&temp2,&pin);
+    fscanf(teacherList," %99[^;];%d;%d;",temp,&temp2,&pin);
 
     *adminPin = pin;
 
