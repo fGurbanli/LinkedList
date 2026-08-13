@@ -16,7 +16,7 @@ typedef struct User {
     struct User* next;
 }User;
 
-int PrintUsers(User* head, int count);
+int PrintStudents(User* head, int count);
 
 void Append(User** head, int age, char name[100]);
 
@@ -28,9 +28,9 @@ void AdminMenu(User** head, int* count, int* adminPin);
 
 void PrintMenu();
 
-void AddUser(int* age,char* temp,size_t size,int* pin,int count, int* adminPin);
+void AddStudent(int* age,char* temp,size_t size,int* pin,int count, int* adminPin);
 
-void AddAdmin(int* age,char* temp,size_t size,int* pin,int count, int* adminPin);
+void AddTeacher(int* age,char* temp,size_t size,int* pin,int count, int* adminPin);
 
-void FindAdminPin(int* adminPin);
+void FindTeacherPin(int* adminPin);
 #endif //LINKEDLIST_MAINFUNCTIONS_H

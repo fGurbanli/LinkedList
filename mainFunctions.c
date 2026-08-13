@@ -30,16 +30,16 @@ void Append(User** head, int age, char name[100]) {
     current->next  = newUser;
 }
 
-int PrintUsers(User* head, int count) {
+int PrintStudents(User* head, int count) {
     int user = 0;
 
     if (count == 0) {
-        printf("\nNo user added yet!");
+        printf("\nNo student added yet!");
         return user;
     }
     user = 1;
 
-    printf("\n==== Total %d Users ====\n", count);
+    printf("\n==== Total %d Students ====\n", count);
 
     User* current = head;
 
@@ -66,47 +66,31 @@ void Menu(User** head, int* count, int* adminPin) {
         int pin;
 
         if (*count == 0) {
-            printf("There is no user added yet. Please create an admin user.\n");
+            printf("There is no teacher added yet. Please create a teacher user.\n");
 
-            AddAdmin(&age,temp,sizeof(temp),&pin,*count,adminPin);
+            AddTeacher(&age,temp,sizeof(temp),&pin,*count,adminPin);
         }
 
-        FindAdminPin(adminPin);
+        FindTeacherPin(adminPin);
 
-        printf("Do you want to run program as an admin? (1/0): ");
+        printf("Do you want to run program as an Teacher? (1/0): ");
         if (GetBoolInput()) {
-            printf("Enter admin pin: ");
+            printf("Enter teacher pin: ");
             int input = GetIntInput();
             if (input == *adminPin) {
                 AdminMenu(head,count,adminPin);
             }
-            printf("Pin is incorrect, running program as a guest...\n");
+            printf("P`teacher pin is incorrect, running program as a guest...\n");
         }
 
-        int ch;
-        while ((ch = getchar()) != '\n' && ch != EOF);
-
-
-        printf("\nPlease enter a username: ");
-        fgets(temp, sizeof(temp), stdin);
-        temp[strcspn(temp, "\n")] = '\0';
-
-        while (age < 10 || age > 100) {
-            printf("\nUser's age has to be between 10 and 100\n");
-            printf("\nEnter an age: ");
-            age = GetIntInput();
-        }
-
-        Append(head, age, temp);
-        (*count)++;
     }
 }
 
 void PrintMenu() {
-    printf("1-)Add an user\n");
-    printf("2-)Delete an user\n");
-    printf("3-)Edit an user\n");
-    printf("4-)User list\n");
+    printf("1-)Add a student\n");
+    printf("2-)Delete a student\n");
+    printf("3-)Edit a student\n");
+    printf("4-)Student list\n");
     printf("\n\n0-)Close program\n");
 }
 
@@ -125,12 +109,12 @@ void AdminMenu(User** head, int* count,int* adminPin) {
                 char temp[100];
                 int age;
                 int pin;
-                AddUser(&age, temp,sizeof(temp),&pin,*count,adminPin);
+                AddStudent(&age, temp,sizeof(temp),&pin,*count,adminPin);
                 Append(head, age, temp);
                 (*count)++;
                 break;
             case 4:
-                PrintUsers(*head, *count);
+                PrintStudents(*head, *count);
                 break;
             default:
                 printf("\nEnter a valid option!\n");
@@ -138,23 +122,23 @@ void AdminMenu(User** head, int* count,int* adminPin) {
     }
 }
 
-void AddUser(int* age,char temp[100],size_t size,int* pin,int count, int* adminPin) {
+void AddStudent(int* age,char temp[100],size_t size,int* pin,int count, int* adminPin) {
     int ch;
     while ((ch = getchar()) != '\n' && ch != EOF);
 
 
-    printf("\nEnter a username: ");
+    printf("\nEnter a student name: ");
     fgets(temp, size, stdin);
     temp[strcspn(temp, "\n")] = '\0';
 
     *age = 0;
     while (*age < 10 || *age > 100) {
-        printf("\nUser's age has to be between 10 and 100\n");
+        printf("\nStudent's age has to be between 10 and 100\n");
         printf("\nEnter an age: ");
         *age = GetIntInput();
     }
 
-    printf("Enter a pin code: ");
+    printf("Enter a student pin: ");
     *pin = GetIntInput();
 
     FILE* userList = fopen("userList.txt", "a");
@@ -169,23 +153,23 @@ void AddUser(int* age,char temp[100],size_t size,int* pin,int count, int* adminP
     fclose(userList);
 }
 
-void AddAdmin(int* age,char temp[100],size_t size,int* pin,int count, int* adminPin) {
+void AddTeacher(int* age,char temp[100],size_t size,int* pin,int count, int* adminPin) {
     int ch;
     while ((ch = getchar()) != '\n' && ch != EOF);
 
 
-    printf("\nEnter a username: ");
+    printf("\nEnter a name of teacher: ");
     fgets(temp, size, stdin);
     temp[strcspn(temp, "\n")] = '\0';
 
     *age = 0;
     while (*age < 10 || *age > 100) {
-        printf("\nUser's age has to be between 10 and 100\n");
+        printf("\nTeacher's age has to be between 20 and 100\n");
         printf("\nEnter an age: ");
         *age = GetIntInput();
     }
 
-    printf("Enter an admin pin code: ");
+    printf("Enter an teacher pin: ");
     *pin = GetIntInput();
     *adminPin = *pin;
 
@@ -201,7 +185,7 @@ void AddAdmin(int* age,char temp[100],size_t size,int* pin,int count, int* admin
     fclose(userList);
 }
 
-void FindAdminPin(int* adminPin) {
+void FindTeacherPin(int* adminPin) {
     int pin;
     char temp[100];
     int temp2 = 0;
