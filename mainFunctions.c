@@ -77,9 +77,25 @@ void Menu(User** head, int* count, int* adminPin) {
             if (input == *adminPin) {
                 AdminMenu(head,count);
             }
-            printf("P`teacher pin is incorrect, running program as a guest...\n");
+            printf("Teacher pin is incorrect, running program as a guest...\n");
         }
+        printf("\nRunning program as a guest...\n");
 
+        printf("1-) Student list\n");
+        printf("\nEnter 0 to exit\n");
+
+        while (1) {
+            int option = GetBoolInput();
+
+            switch (option) {
+                case 0:
+                    printf("\nClosing program...");
+                    FreeList(*head);
+                    exit(0);
+                case 1:
+                    PrintStudents(*head, *count);
+            }
+        }
     }
 }
 
