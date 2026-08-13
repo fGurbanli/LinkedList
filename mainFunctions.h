@@ -28,9 +28,9 @@ void AdminMenu(User** head, int* count, int* adminPin);
 
 void PrintMenu();
 
-void AddStudent(int* age,char* temp,size_t size,int* pin,int count, int* adminPin);
+void AddStudent(int* age,char* temp,size_t size,int* pin);
 
-void AddTeacher(int* age,char* temp,size_t size,int* pin,int count, int* adminPin);
+void AddTeacher(int* age,char* temp,size_t size,int* pin, int* adminPin);
 
 void FindTeacherPin(int* adminPin);
 #endif //LINKEDLIST_MAINFUNCTIONS_H

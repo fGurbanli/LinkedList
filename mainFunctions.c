@@ -68,7 +68,7 @@ void Menu(User** head, int* count, int* adminPin) {
         if (*count == 0) {
             printf("There is no teacher added yet. Please create a teacher user.\n");
 
-            AddTeacher(&age,temp,sizeof(temp),&pin,*count,adminPin);
+            AddTeacher(&age,temp,sizeof(temp),&pin, adminPin);
         }
 
         FindTeacherPin(adminPin);
@@ -109,7 +109,7 @@ void AdminMenu(User** head, int* count,int* adminPin) {
                 char temp[100];
                 int age;
                 int pin;
-                AddStudent(&age, temp,sizeof(temp),&pin,*count,adminPin);
+                AddStudent(&age, temp,sizeof(temp),&pin);
                 Append(head, age, temp);
                 (*count)++;
                 break;
@@ -122,7 +122,7 @@ void AdminMenu(User** head, int* count,int* adminPin) {
     }
 }
 
-void AddStudent(int* age,char temp[100],size_t size,int* pin,int count, int* adminPin) {
+void AddStudent(int* age,char temp[100],size_t size,int* pin) {
     int ch;
     while ((ch = getchar()) != '\n' && ch != EOF);
 
@@ -153,7 +153,7 @@ void AddStudent(int* age,char temp[100],size_t size,int* pin,int count, int* adm
     fclose(userList);
 }
 
-void AddTeacher(int* age,char temp[100],size_t size,int* pin,int count, int* adminPin) {
+void AddTeacher(int* age,char temp[100],size_t size,int* pin,int* adminPin) {
     int ch;
     while ((ch = getchar()) != '\n' && ch != EOF);
 
