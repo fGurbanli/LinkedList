@@ -30,7 +30,7 @@ void PrintMenu();
 
 void AddStudent(int* age,char* temp,size_t size,int* pin);
 
-void AddTeacher(int* age,char* temp,size_t size,int* pin, int* adminPin);
+void AddTeacher(int* adminPin);
 
 void FindTeacherPin(int* adminPin);
 #endif //LINKEDLIST_MAINFUNCTIONS_H

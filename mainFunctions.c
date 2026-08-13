@@ -61,14 +61,11 @@ void FreeList(User* head) {
 void Menu(User** head, int* count, int* adminPin) {
 
     while (1) {
-        char temp[100];
-        int age;
-        int pin;
 
         if (*count == 0) {
             printf("There is no teacher added yet. Please create a teacher user.\n");
 
-            AddTeacher(&age,temp,sizeof(temp),&pin, adminPin);
+            AddTeacher(adminPin);
         }
 
         FindTeacherPin(adminPin);
@@ -153,25 +150,26 @@ void AddStudent(int* age,char temp[100],size_t size,int* pin) {
     fclose(userList);
 }
 
-void AddTeacher(int* age,char temp[100],size_t size,int* pin,int* adminPin) {
+void AddTeacher(int* adminPin) {
+    char temp[100];
+    int age = 0;
     int ch;
     while ((ch = getchar()) != '\n' && ch != EOF);
 
 
     printf("\nEnter a name of teacher: ");
-    fgets(temp, size, stdin);
+    fgets(temp, sizeof(temp), stdin);
     temp[strcspn(temp, "\n")] = '\0';
 
-    *age = 0;
-    while (*age < 10 || *age > 100) {
+    while (age < 10 || age > 100) {
         printf("\nTeacher's age has to be between 20 and 100\n");
         printf("\nEnter an age: ");
-        *age = GetIntInput();
+        age = GetIntInput();
     }
 
     printf("Enter an teacher pin: ");
-    *pin = GetIntInput();
-    *adminPin = *pin;
+    int pin = GetIntInput();
+    *adminPin = pin;
 
     FILE* userList = fopen("userList.txt", "a");
 
@@ -180,7 +178,7 @@ void AddTeacher(int* age,char temp[100],size_t size,int* pin,int* adminPin) {
         return;
     }
 
-    fprintf(userList,"%s;%d;%d;\n", temp, *age, *pin);
+    fprintf(userList,"%s;%d;%d;\n", temp, age, pin);
 
     fclose(userList);
 }
