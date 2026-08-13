@@ -94,6 +94,8 @@ void Menu(User** head, int* count, int* adminPin) {
                     exit(0);
                 case 1:
                     PrintStudents(*head, *count);
+                    FreeList(*head);
+                    exit(0);
             }
         }
     }
